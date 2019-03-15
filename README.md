@@ -1,1 +1,1 @@
-#Computer Vision - Texture Synthesis
+# Computer Vision - Texture Synthesis
