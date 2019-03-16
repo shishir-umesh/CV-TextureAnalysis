@@ -6,11 +6,7 @@ The paper can be found at this link : http://graphics.cs.cmu.edu/people/efros/re
 ## Getting Started
 We are given a pseudo code of the implementation of Non-Parametric Sampling algorithm which we need to run on the sample gif images to synthesize a 200x200 pixel image.  
 <br/>
-<<<<<<< HEAD
-Example image : <br/><img src="https://github.com/Shishir94/CV-TextureAnalysis/blob/master/textures/T1.gif" alt="Texture" width="160">
-=======
-Example image : <br/><img src="https://github.com/Shishir94/CV-TextureAnalysis/blob/master/textures/T1.gif" alt="Texture" width="160"><br/>
->>>>>>> 99de1186a331e92e730da14141303e7edc6f62fc
+Example image : <br/> <img src="https://github.com/Shishir94/CV-TextureAnalysis/blob/master/textures/T1.gif" alt="Texture" width="160"><br/>
 <br/>
 We repeat this for various WindowSize parameters and evaluate the performance and quality of the synthesized image.  
 <br/>
