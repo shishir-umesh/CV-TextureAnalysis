@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage import io, morphology, exposure
 from seed import *
+import random
 
 """
 We implement the pseudo code for the Efros and Leung, Non-Parametric Sampling Texture Analysis
@@ -23,6 +24,7 @@ def textureAnalysis(imageFile, windowSize):
     seed = 3
     halfWindow = (windowSize - 1) // 2
     totalPixels = 200*200
+    filledPixels = seed * seed
 
     synthesizedImage, filledMap = seed_image(img, seed, 200, 200)
 
@@ -31,7 +33,26 @@ def textureAnalysis(imageFile, windowSize):
     synthImagePad = np.lib.pad(synthesizedImage, halfWindow, mode='constant', constant_values=0)
     filledMapPad = np.lib.pad(filledMap, halfWindow, mode='constant', constant_values=0)
 
+    gaussMask = GaussMask(windowSize,sigma)
+    #print(gaussMask)
+
+    while filledPixels < totalPixels:
+        progress = False
+        #You get a 2xn array with the first row being the x coordinate
+        #and the second row being the y coordinate of all unfilled pixels that have filled pixels as their neighbors
+        pixelList = np.nonzero(morphology.binary_dilation(filledMap) - filledMap)
+        neighbors = []
+        neighbors.append([np.sum(filledMap[pixelList[0][i] - halfWindow : pixelList[0][i] + halfWindow + 1, pixelList[1][i] - halfWindow : pixelList[1][i] + halfWindow + 1]) for i in range(len(pixelList[0]))])
+        decreasingOrder = np.argsort(-np.array(neighbors, dtype=int))
+
+        break
     return
+
+
+def GaussMask(windowSize, sigma):
+    x, y = np.mgrid[-windowSize//2 + 1:windowSize//2 + 1, -windowSize//2 + 1:windowSize//2 + 1]
+    g = np.exp(-((x**2 + y**2)/(2.0*sigma**2)))
+    return g/g.sum()
 
 
 if __name__ == '__main__':
