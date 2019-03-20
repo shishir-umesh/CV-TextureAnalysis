@@ -16,7 +16,6 @@ def textureAnalysis(imageFile, windowSize):
     img = io.imread(imageFile)
     img = img/255.0
     row, col = np.shape(img)
-
     #Setting the ErrThreshold, MaxErrThreshold, seed size and the sigma values as mentioned in the NPS pseudo Code
     ErrThreshold = 0.1
     MaxErrThreshold = 0.3
@@ -29,9 +28,8 @@ def textureAnalysis(imageFile, windowSize):
 
     synthesizedImage, filledMap = seed_image(img, seed, 200, 200)
 
-
-    img_window = sliding_window(img,halfWindow)
-    print(img_window.shape)
+    convPatches = sliding_window(img,halfWindow)
+    print(convPatches.shape)
 
     #To facilitate easier retrieval of neighbourhood about any point pad the output image
     # and the filledMap with zeros.
@@ -52,7 +50,7 @@ def textureAnalysis(imageFile, windowSize):
         for i in decreasingOrder[0]:
             template = synthImagePad[pixelList[0][i] - halfWindow + halfWindow:pixelList[0][i] + halfWindow + halfWindow + 1, pixelList[1][i] - halfWindow + halfWindow:pixelList[1][i] + halfWindow + halfWindow + 1]
             validMask = filledMapPad[pixelList[0][i] - halfWindow + halfWindow:pixelList[0][i] + halfWindow + halfWindow + 1, pixelList[1][i] - halfWindow + halfWindow:pixelList[1][i] + halfWindow + halfWindow + 1]
-            best_match = findMatches(template,img_window,validMask,gaussMask,windowSize, halfWindow, ErrThreshold)
+            best_match = findMatches(template,convPatches,validMask,gaussMask,windowSize, halfWindow, ErrThreshold)
             #Picks a random value from the list of best_match
             pick = randint(0, len(best_match)-1)
             if best_match[pick][0]<=MaxErrThreshold:
