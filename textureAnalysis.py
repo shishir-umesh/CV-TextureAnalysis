@@ -24,9 +24,14 @@ def textureAnalysis(imageFile, windowSize):
     seed = 3
     halfWindow = (windowSize - 1) // 2
     totalPixels = 200*200
+    print("totalPixels =",totalPixels)
     filledPixels = seed * seed
 
     synthesizedImage, filledMap = seed_image(img, seed, 200, 200)
+
+
+    img_window = sliding_window(img,halfWindow)
+    print(img_window.shape)
 
     #To facilitate easier retrieval of neighbourhood about any point pad the output image
     # and the filledMap with zeros.
@@ -44,8 +49,27 @@ def textureAnalysis(imageFile, windowSize):
         neighbors = []
         neighbors.append([np.sum(filledMap[pixelList[0][i] - halfWindow : pixelList[0][i] + halfWindow + 1, pixelList[1][i] - halfWindow : pixelList[1][i] + halfWindow + 1]) for i in range(len(pixelList[0]))])
         decreasingOrder = np.argsort(-np.array(neighbors, dtype=int))
+        for i in decreasingOrder[0]:
+            template = synthImagePad[pixelList[0][i] - halfWindow + halfWindow:pixelList[0][i] + halfWindow + halfWindow + 1, pixelList[1][i] - halfWindow + halfWindow:pixelList[1][i] + halfWindow + halfWindow + 1]
+            validMask = filledMapPad[pixelList[0][i] - halfWindow + halfWindow:pixelList[0][i] + halfWindow + halfWindow + 1, pixelList[1][i] - halfWindow + halfWindow:pixelList[1][i] + halfWindow + halfWindow + 1]
+            best_match = findMatches(template,img_window,validMask,gaussMask,windowSize, halfWindow, ErrThreshold)
+            #Picks a random value from the list of best_match
+            pick = randint(0, len(best_match)-1)
+            if best_match[pick][0]<=MaxErrThreshold:
+                synthImagePad[halfWindow+pixelList[0][i]][halfWindow+pixelList[1][i]] = best_match[pick][1]
+                synthesizedImage[pixelList[0][i]][pixelList[1][i]] = best_match[pick][1]
+                filledMapPad[halfWindow+pixelList[0][i]][halfWindow+pixelList[1][i]] = 1
+                filledMap[pixelList[0][i]][pixelList[1][i]] = 1
+                filledPixels+=1
+                progress = True
 
-        break
+        if not progress:
+            MaxErrThreshold *= 1.1
+            print("new threshold = ",str(MaxErrThreshold))
+        print(filledPixels)
+
+    io.imsave("T2-synth.gif", synthesizedImage)
+    plt.show()
     return
 
 
@@ -54,6 +78,13 @@ def GaussMask(windowSize, sigma):
     g = np.exp(-((x**2 + y**2)/(2.0*sigma**2)))
     return g/g.sum()
 
+def sliding_window(src_img, halfWindow):
+    src_window_matrix = []
+    for i in range(halfWindow, src_img.shape[0]-halfWindow-1):
+        for j in range(halfWindow, src_img.shape[1]-halfWindow-1):
+            src_window_matrix.append(np.reshape(src_img[i-halfWindow:i + halfWindow + 1, j - halfWindow: j + halfWindow + 1], (2 * halfWindow + 1) ** 2))
+    return np.double(src_window_matrix)
+
 
 if __name__ == '__main__':
-    textureAnalysis("textures/T2.gif", 11)
+    textureAnalysis("textures/T1.gif", 11)
