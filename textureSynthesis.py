@@ -3,13 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage import io, morphology, exposure
 from seed import *
+from findMatches import *
 import random
 
 """
 We implement the pseudo code for the Efros and Leung, Non-Parametric Sampling Texture Analysis
 """
 
-def textureAnalysis(imageFile, windowSize):
+def textureSynthesis(imageFile, windowSize):
 
     #Reads the image and reduces the value from 0-255 range down to 0-1 range as instructued in the pseudo code
     #Gets the number of rows and coloumns in the the original image

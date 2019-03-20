@@ -1,5 +1,5 @@
 import time
-from textureAnalysis import *
+from textureSynthesis import *
 
 
 if __name__ == '__main__':
