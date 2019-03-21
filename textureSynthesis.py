@@ -10,10 +10,11 @@ import random
 We implement the pseudo code for the Efros and Leung, Non-Parametric Sampling Texture Analysis
 """
 
-def textureSynthesis(imageFile, windowSize):
+def textureSynthesis(imageFile, windowSize, outputSize):
 
     #Reads the image and reduces the value from 0-255 range down to 0-1 range as instructued in the pseudo code
     #Gets the number of rows and coloumns in the the original image
+    print(imageFile)
     img = io.imread(imageFile)
     img = img/255.0
     row, col = np.shape(img)
@@ -23,11 +24,11 @@ def textureSynthesis(imageFile, windowSize):
     sigma = windowSize/6.4
     seed = 3
     halfWindow = (windowSize - 1) // 2
-    totalPixels = 200*200
+    totalPixels = outputSize*outputSize
     print("totalPixels =",totalPixels)
     filledPixels = seed * seed
 
-    synthesizedImage, filledMap = seed_image(img, seed, 200, 200)
+    synthesizedImage, filledMap = seed_image(img, seed, outputSize, outputSize)
 
     convPatches = sliding_window(img,halfWindow)
     print(convPatches.shape)
@@ -67,7 +68,7 @@ def textureSynthesis(imageFile, windowSize):
             print("new threshold = ",str(MaxErrThreshold))
         print(filledPixels)
 
-    io.imsave("T2-synth.gif", synthesizedImage)
+    io.imsave(imageFile+"-synth.gif", synthesizedImage)
     plt.show()
     return
 
