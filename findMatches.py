@@ -13,7 +13,8 @@ def findMatches(template,convPatches, valid_mask, gauss_mask, windowSize, halfWi
     # PSEUDO CODE ----->   SSD(i,j) = SSD(i,j) + dist*ValidMask(ii,jj)*GaussMask(ii,jj)
     # PSEUDO CODE ----->   SSD(i,j) = SSD(i,j) / TotWeight
     ssd = np.sum((distance*gauss_mask*valid_mask) / total_weight, axis=1)
+    # PSEUDO CODE ----->   min(SSD)
     min_error = min(ssd)
-    # print "Min err mat= "+str(min_error)
-    mid = int(((2 * halfWindow + 1) ** 2) / 2)
-    return [[err, convPatches[i][mid]] for i, err in enumerate(ssd) if err <= min_error*(1+ErrThreshold)]
+    j = int(((2 * halfWindow + 1) ** 2) / 2)
+    # PSEUDO CODE ----->   PixelList = all pixels (i,j) where SSD(i,j) <= min(SSD)*(1+ErrThreshold)
+    return [[err, convPatches[i][j]] for i, err in enumerate(ssd) if err <= min_error*(1+ErrThreshold)]
