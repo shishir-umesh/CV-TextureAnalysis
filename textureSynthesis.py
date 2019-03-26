@@ -5,6 +5,7 @@ from skimage import io, morphology, exposure
 from seed import *
 from findMatches import *
 import random
+import sys
 
 """
 We implement the pseudo code for the Efros and Leung, Non-Parametric Sampling Texture Analysis
@@ -25,7 +26,6 @@ def textureSynthesis(imageFile, windowSize, outputSize):
     seed = 3
     halfWindow = (windowSize - 1) // 2
     totalPixels = outputSize*outputSize
-    print("totalPixels =",totalPixels)
     filledPixels = seed * seed
 
     # Call the seed_image function which returns a randomly selected square patch from
@@ -88,7 +88,9 @@ def textureSynthesis(imageFile, windowSize, outputSize):
         if not progress:
             # PSEUDO CODE -----> then MaxErrThreshold = MaxErrThreshold * 1.1
             MaxErrThreshold *= 1.1
-        print(filledPixels)
+        i = (filledPixels/totalPixels)*100
+        sys.stdout.write("\r%d%%" % i)
+        sys.stdout.flush()
 
     io.imsave(imageFile.split('.')[0]+"-"+str(windowSize)+"-synth.gif", synthesizedImage)
     plt.show()
@@ -117,4 +119,8 @@ def convolutionPatches(src_img, halfWindow):
 
 
 if __name__ == '__main__':
-    textureSynthesis("textures/T1.gif", 11, 200)
+
+    start = time.time()
+    textureSynthesis("textures/T1.gif", 5, 200)
+    end = time.time()
+    print(end-start)
