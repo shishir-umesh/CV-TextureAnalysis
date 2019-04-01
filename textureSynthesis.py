@@ -6,6 +6,8 @@ from seed import *
 from findMatches import *
 import random
 import sys
+import logging
+from logging.config import dictConfig
 
 """
 We implement the pseudo code for the Efros and Leung, Non-Parametric Sampling Texture Analysis
@@ -120,7 +122,10 @@ def convolutionPatches(src_img, halfWindow):
 
 if __name__ == '__main__':
 
+    logging.basicConfig(filename="runTime.log", level=logging.INFO)
+    windowSize = 23
+    file = "T5.gif"
     start = time.time()
-    textureSynthesis("textures/T1.gif", 5, 200)
+    textureSynthesis("textures/T5.gif", windowSize, 200)
     end = time.time()
-    print(end-start)
+    logging.info("\t"+file+"-"+str(windowSize)+"\t:-  "+str(end-start)+" secs")
