@@ -15,7 +15,7 @@ The pseudocode for the algorithm : http://graphics.cs.cmu.edu/people/efros/resea
 We plot synthesize images for various window sizes hence resulting in synthesised images becoming better qualitatively however taking a longer time to be synthesized. The results for synthesized images for different seed images are as follows:
 
 <br/>
-Texture 1 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T1-res.png" alt="Texture" width="160"><br/>
+Texture 1 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T1-res.png" alt="Texture"><br/>
 
 <br/>
 Texture 2 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T2-res.png" alt="Texture" width="160"><br/>
