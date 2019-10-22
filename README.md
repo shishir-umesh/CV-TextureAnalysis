@@ -11,3 +11,8 @@ Example image : <br/> <img src="https://github.com/Shishir94/CV-TextureAnalysis/
 We repeat this for various WindowSize parameters and evaluate the performance and quality of the synthesized image.  
 <br/>
 The pseudocode for the algorithm : http://graphics.cs.cmu.edu/people/efros/research/NPS/alg.html
+
+We plot synthesize images for various window sizes hence resulting in synthesised images becoming better qualitatively however taking a longer time to be synthesized. The results for synthesized images for different seed images are as follows:
+
+<br/>
+Example image : <br/> <img src="https://github.com/Shishir94/CV-TextureAnalysis/blob/master/textures/T1.gif" alt="Texture" width="160"><br/>
