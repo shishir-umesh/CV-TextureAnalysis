@@ -18,13 +18,13 @@ We plot synthesize images for various window sizes hence resulting in synthesise
 Texture 1 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T1-res.png" alt="Texture"><br/>
 
 <br/>
-Texture 2 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T2-res.png" alt="Texture" width="160"><br/>
+Texture 2 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T2-res.png" alt="Texture"><br/>
 
 <br/>
-Texture 3 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T3-res.png" alt="Texture" width="160"><br/>
+Texture 3 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T3-res.png" alt="Texture"><br/>
 
 <br/>
-Texture 4 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T4-res.png" alt="Texture" width="160"><br/>
+Texture 4 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T4-res.png" alt="Texture"><br/>
 
 <br/>
-Texture 5 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T5-res.png" alt="Texture" width="160"><br/>
+Texture 5 : <br/> <img src="https://github.com/shishir-umesh/CV-TextureAnalysis/blob/master/result/T5-res.png" alt="Texture"><br/>
